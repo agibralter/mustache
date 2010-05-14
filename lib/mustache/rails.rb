@@ -30,7 +30,7 @@ class Mustache
     # Mustache::Rails::Config.template_base_path = Rails.root.join('app', 'templates')
     module Config
       def self.template_base_path
-        @template_base_path ||= ::Rails.root.join('app', 'mustache_templates')
+        @template_base_path ||= ::Rails.root.join('app', 'templates')
       end
 
       def self.template_base_path=(value)
