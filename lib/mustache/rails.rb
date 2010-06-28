@@ -103,13 +103,12 @@ class Mustache
       end
 
       def mustache_class_from_template(template)
-        const_name = [template.base_path, template.name].compact.join("/").camelize
+        const_name = ["views", template.base_path, template.name].compact.join("/").camelize
         defined?(const_name) ? const_name.constantize : Mustache
       end
     end
   end
 end
 
-::ActiveSupport::Dependencies.load_paths << Rails.root.join("app", "views")
 ::ActionView::Base.send(:include, Mustache::Rails::ViewHelper)
 ::ActionView::Template.register_template_handler(:rb, Mustache::Rails::TemplateHandler)
