@@ -21,7 +21,11 @@ class Mustache
     # Redefine where Mustache::Rails templates locate their partials: in the
     # same file as the current template file.
     def partial(name)
-      File.read(File.join(self.class.template_file.dirname, "#{name}.#{Config.template_extension}"))
+      begin
+        File.read(File.join(self.class.template_file.dirname, "#{name}.#{Config.template_extension}"))
+      rescue Errno::ENOENT
+        File.read(File.join(Config.template_base_path, "#{name}.#{Config.template_extension}"))
+      end
     end
 
     # You can change these defaults in, say, a Rails initializer or
