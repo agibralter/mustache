@@ -74,7 +74,7 @@ class Mustache
         # for a Mustache::Rails subclass? If so, there needs to be a change to
         # Mustache::Rails.template_path and Mustache::Rails.template_file.
         mustache.template_file = Config.template_base_path + template.base_path + "#{template.name}.#{Config.template_extension}"
-        returning mustache.new do |result|
+        mustache.new.tap do |result|
           copy_instance_variables_to(result)
           result.view    = @view
           result[:yield] = @view.instance_variable_get(:@content_for_layout)
